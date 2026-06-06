@@ -12,6 +12,10 @@ import {
     protect,
 } from "../middlewares/auth.middleware";
 
+import {
+    companyOnly
+} from "../middlewares/company.middleware";
+
 const router =
     express.Router();
 
@@ -26,9 +30,10 @@ router.get(
 );
 
 router.post(
-    "/",
-    protect,
-    createJob
+  "/",
+  protect,
+  companyOnly,
+  createJob
 );
 
 router.put(

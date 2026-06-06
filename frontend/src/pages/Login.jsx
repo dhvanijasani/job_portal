@@ -94,6 +94,7 @@ const Login = () => {
         >
           Login
         </button>
+        <p>If you don't have an account, <a href="/register" className="text-green-600">register here</a>.</p>
       </form>
     </div>
   );

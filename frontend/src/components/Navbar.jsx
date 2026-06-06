@@ -4,7 +4,10 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+
+    const user = JSON.parse(
+        localStorage.getItem("user") || "{}"
+    );
 
     const logout = () => {
         localStorage.clear();
@@ -33,26 +36,68 @@ const Navbar = () => {
 
                     {token && (
                         <>
-                            <Link
-                                to="/my-applications"
-                                className="hover:text-blue-400"
-                            >
-                                My Applications
-                            </Link>
-                            <Link
-                                to="/add-job"
-                                className="hover:text-blue-400"
-                            >
-                                Add Job
-                            </Link>
+                            {/* USER */}
+
+                            {user?.role === "user" && (
+                                <Link
+                                    to="/my-applications"
+                                    className="hover:text-blue-400"
+                                >
+                                    My Applications
+                                </Link>
+                            )}
+
+                            {/* COMPANY */}
+
+                            {user?.role === "company" && (
+                                <>
+                                    <Link
+                                        to="/add-job"
+                                        className="hover:text-blue-400"
+                                    >
+                                        Add Job
+                                    </Link>
+
+                                    <Link
+                                        to="/company-jobs"
+                                        className="hover:text-blue-400"
+                                    >
+                                        My Jobs
+                                    </Link>
+                                </>
+                            )}
+
+                            {/* ADMIN */}
+
+                            {user?.role === "admin" && (
+                                <>
+                                    <Link
+                                        to="/dashboard"
+                                        className="hover:text-blue-400"
+                                    >
+                                        Dashboard
+                                    </Link>
+
+                                    <Link
+                                        to="/manage-users"
+                                        className="hover:text-blue-400"
+                                    >
+                                        Users
+                                    </Link>
+                                </>
+                            )}
 
                             <span className="text-gray-300">
                                 {user?.name}
+                                {" "}
+                                (
+                                {user?.role}
+                                )
                             </span>
 
                             <button
                                 onClick={logout}
-                                className="bg-red-500 px-4 py-2 rounded"
+                                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
                             >
                                 Logout
                             </button>

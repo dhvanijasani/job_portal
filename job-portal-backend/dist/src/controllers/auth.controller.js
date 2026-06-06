@@ -8,8 +8,10 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const generateToken_1 = require("../utils/generateToken");
 const prisma_1 = __importDefault(require("../config/prisma"));
 const register = async (req, res) => {
+    console.log("REQ BODY:", req.body);
     try {
-        const { name, email, password, } = req.body;
+        const { name, email, password, role, } = req.body;
+        console.log("CREATED USER =", role);
         const existingUser = await prisma_1.default.user.findUnique({
             where: {
                 email,
@@ -26,6 +28,7 @@ const register = async (req, res) => {
                 name,
                 email,
                 password: hashedPassword,
+                role: String(role).toLowerCase().trim(),
             },
         });
         res.status(201).json({

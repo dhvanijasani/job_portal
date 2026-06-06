@@ -8,12 +8,16 @@ export const register = async (
     req: Request,
     res: Response
 ) => {
+    console.log("REQ BODY:", req.body);
     try {
         const {
             name,
             email,
             password,
+            role,
         } = req.body;
+
+        console.log("CREATED USER =", role);
 
         const existingUser =
             await prisma.user.findUnique({
@@ -42,6 +46,7 @@ export const register = async (
                     email,
                     password:
                         hashedPassword,
+                    role: String(role).toLowerCase().trim(),
                 },
             });
 

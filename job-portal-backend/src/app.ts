@@ -7,7 +7,15 @@ import applicationRoutes from "./routes/application.routes";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://YOUR-VERCEL-URL.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 

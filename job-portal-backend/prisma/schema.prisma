@@ -24,7 +24,6 @@ model Job {
   location     String
   salary       String
   description  String
-
   applications Application[]
 }
 
