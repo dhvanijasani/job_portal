@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://YOUR-VERCEL-URL.vercel.app",
+      "https://job-portal-gilt-nine.vercel.app",
     ],
     credentials: true,
   })
@@ -19,18 +19,8 @@ app.use(
 
 app.use(express.json());
 
-app.use(
-    "/api/auth",
-    authRoutes
-);
+app.use("/api/auth", authRoutes);
+app.use("/api/jobs", jobRoutes);
+app.use("/api/applications", applicationRoutes);
 
-app.use(
-    "/api/jobs",
-    jobRoutes
-);
-
-app.use(
-  "/api/applications",
-  applicationRoutes
-);
 export default app;
